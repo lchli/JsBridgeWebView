@@ -13,6 +13,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        WebActivity.start(this, "192.168.234.143:9008");
+        WebActivity.start(this, "http://192.168.31.105:9008/");
     }
 }

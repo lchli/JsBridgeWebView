@@ -33,4 +33,13 @@ public class DefaultBridgeWebActivity extends AppCompatActivity {
     protected void initLoad(String url) {
         mWebView.loadUrl(url);
     }
+
+    @Override
+    public void onBackPressed() {
+        if (mWebView.canGoBack()) {
+            mWebView.goBack();
+            return;
+        }
+        super.onBackPressed();
+    }
 }
