@@ -14,3 +14,20 @@
       </v-row>
     </v-container>
   </template>
+
+<script>
+
+export default {
+  mounted() {
+    const thiz=this
+    if(window.$$registerEventListener){
+      window.$$registerEventListener("back","id",function(eventName,param){
+        console.log(`back`)
+        thiz.$router.back()
+      })
+    }
+    console.log(`the component is now mounted.`)
+  }
+}
+
+</script>

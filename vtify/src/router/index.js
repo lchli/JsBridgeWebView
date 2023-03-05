@@ -5,11 +5,17 @@ const routes = [
   {
     path: '/',
     component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
+    meta:{
+      keepAlive:true
+    }
    
   },
   {
     path: '/login',
     component: () => import('@/views/Login.vue'),
+    meta:{
+      keepAlive:true
+    }
    
   },
 ]
