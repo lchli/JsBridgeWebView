@@ -1,6 +1,7 @@
 package com.lchli.jsbridgeweb;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
@@ -50,7 +51,6 @@ public class JsBridgeWebView extends WebView {
     private void init() {
         getSettings().setJavaScriptEnabled(true);
         addJavascriptInterface(new NativeApi(), "LchNativeApi");
-
         setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
