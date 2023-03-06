@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 
 include ':JsBridgeWeb'
 include ':app'
+include ':LotFilter'
