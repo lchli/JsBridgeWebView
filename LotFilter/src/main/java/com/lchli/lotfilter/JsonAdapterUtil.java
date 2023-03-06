@@ -22,7 +22,7 @@ import java.util.List;
 
 public class JsonAdapterUtil {
 
-    public JSONObject filter(JSONObject options) {
+    public static JSONObject filter(JSONObject options) {
         Log.e("sss", "filter:" + options);
 
         JSONObject data = new JSONObject();
@@ -43,7 +43,7 @@ public class JsonAdapterUtil {
         }
 
         try {
-            JSONArray numbers = options.getJSONArray("shaDanMa");
+            JSONArray numbers = options.optJSONArray("shaDanMa");
             if (numbers != null && numbers.length() > 0) {
                 filterManager.addFilter(new ShaDanMa(arrToList(numbers)));
             }
@@ -52,7 +52,7 @@ public class JsonAdapterUtil {
         }
 
         try {
-            JSONArray numbers = options.getJSONArray("heWei");
+            JSONArray numbers = options.optJSONArray("heWei");
             if (numbers != null && numbers.length() > 0) {
                 filterManager.addFilter(new DingHewei(arrToList(numbers)));
             }
@@ -60,7 +60,7 @@ public class JsonAdapterUtil {
             e.printStackTrace();
         }
         try {
-            JSONArray numbers = options.getJSONArray("kuaDu");
+            JSONArray numbers = options.optJSONArray("kuaDu");
             if (numbers != null && numbers.length() > 0) {
                 filterManager.addFilter(new DingKuadu(arrToList(numbers)));
             }
@@ -69,7 +69,7 @@ public class JsonAdapterUtil {
         }
 
         try {
-            JSONArray numbers = options.getJSONArray("erMa");
+            JSONArray numbers = options.optJSONArray("erMa");
             if (numbers != null && numbers.length() > 0) {
                 filterManager.addFilter(new DingErMa(arrToList(numbers)));
             }
@@ -77,7 +77,7 @@ public class JsonAdapterUtil {
             e.printStackTrace();
         }
         try {
-            JSONArray numbers = options.getJSONArray("shaErMa");
+            JSONArray numbers = options.optJSONArray("shaErMa");
             if (numbers != null && numbers.length() > 0) {
                 filterManager.addFilter(new ShaErMa(arrToList(numbers)));
             }
@@ -85,7 +85,7 @@ public class JsonAdapterUtil {
             e.printStackTrace();
         }
         try {
-            JSONObject duanZu = options.getJSONObject("duanZu");
+            JSONObject duanZu = options.optJSONObject("duanZu");
             if (duanZu != null && duanZu.length() > 0) {
                 JSONArray d1 = duanZu.getJSONArray("d1");
                 JSONArray d2 = duanZu.getJSONArray("d2");
@@ -100,7 +100,7 @@ public class JsonAdapterUtil {
         }
 
         try {
-            JSONObject nMa = options.getJSONObject("nMa");
+            JSONObject nMa = options.optJSONObject("nMa");
             if (nMa != null && nMa.length() > 0) {
                 JSONArray source = nMa.getJSONArray("source");
                 JSONArray count = nMa.getJSONArray("count");
@@ -116,7 +116,7 @@ public class JsonAdapterUtil {
 
         List<Integer> rongCuo = null;
         try {
-            JSONArray numbers = options.getJSONArray("rongCuo");
+            JSONArray numbers = options.optJSONArray("rongCuo");
             if (numbers != null && numbers.length() > 0) {
                 rongCuo = arrToListInt(numbers);
             }
@@ -136,7 +136,8 @@ public class JsonAdapterUtil {
         try {
             filterManager = new FilterManager();
 
-            JSONArray numbers = options.getJSONArray("type");
+            JSONArray numbers = options.optJSONArray("type");
+            Log.e("chromium","type numbers:"+numbers.length());
             if (numbers != null && numbers.length() > 0) {
                 List<String> list = arrToList(numbers);
                 if (!list.contains("1")) {
@@ -150,9 +151,7 @@ public class JsonAdapterUtil {
                 }
 
             } else {
-                filterManager.addFilter(new Zu6._Zu6Reverse());
-                filterManager.addFilter(new Zu3._ZuSanReverse());
-                filterManager.addFilter(new ZZZ._ZZZReverse());
+                Log.e("chromium","no type===");
             }
 
             res = filterManager.runFilter(res);
@@ -182,7 +181,7 @@ public class JsonAdapterUtil {
         return data;
     }
 
-    private List<String> arrToList(JSONArray arr) {
+    private static List<String> arrToList(JSONArray arr) {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < arr.length(); i++) {
             list.add(arr.optString(i));
@@ -190,7 +189,7 @@ public class JsonAdapterUtil {
         return list;
     }
 
-    private List<Integer> arrToListInt(JSONArray arr) {
+    private static List<Integer> arrToListInt(JSONArray arr) {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < arr.length(); i++) {
             list.add(Integer.parseInt(arr.optString(i)));

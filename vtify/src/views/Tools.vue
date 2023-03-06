@@ -2,7 +2,7 @@
     <v-container>
         <v-row no-gutters justify="space-between" align="center">
             <v-col :key="1">
-                <v-card height="100px" class="text-center d-flex flex-column align-center justify-center">
+                <v-card height="100px" class="text-center d-flex flex-column align-center justify-center" @click="launchFilterPage">
                     缩水
                 </v-card>
             </v-col>
@@ -24,3 +24,12 @@
         </v-row>
     </v-container>
 </template>
+
+<script setup>
+import { useRouter } from 'vue-router';
+const router = useRouter()
+
+function launchFilterPage() {
+    router.push({ path: '/filter' })
+}
+</script>

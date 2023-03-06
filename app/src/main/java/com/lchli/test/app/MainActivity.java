@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        WebActivity.start(this, "http://192.168.31.105:3000/");
-       // WebActivity.start(this, "https://lchli.github.io");
+        //WebActivity.start(this, "http://192.168.1.3:3000/");
+       WebActivity.start(this, "https://lchli.github.io");
     }
 }

@@ -13,9 +13,12 @@ const routes = [
   {
     path: '/login',
     component: () => import('@/views/Login.vue'),
-    meta:{
-      keepAlive:true
-    }
+  
+  },
+  {
+    path: '/filter',
+    component: () => import('@/views/Filter.vue'),
+  
    
   },
 ]
