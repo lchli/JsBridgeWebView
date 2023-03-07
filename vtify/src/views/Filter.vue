@@ -71,7 +71,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, onUnmounted } from 'vue'
 
 const router = useRouter()
 
@@ -109,6 +109,13 @@ types.value.push({ lab: '组三', checked: false, value: "2" })
 types.value.push({ lab: '组六', checked: false, value: "1" })
 types.value.push({ lab: '豹子', checked: false, value: "3" })
 
+function filterListener(e, p) {
+    console.log(p)
+    let j = JSON.parse(p)
+    filterResult.value = j.data
+    dialog.value = true
+}
+
 
 function launchFilterPage() {
     router.push({ path: '/filter' })
@@ -125,12 +132,7 @@ function doFilter() {
     params.type = types.value.filter(e => e.checked).map(e => e.value)
 
     if (window.$$callNative) {
-        window.$$callNative("filter", JSON.stringify(params), "id", (e, p) => {
-            console.log(p)
-            let j = JSON.parse(p)
-            filterResult.value = j.data
-            dialog.value = true
-        })
+        window.$$callNative("filter", JSON.stringify(params), filterListener)
     }
 }
 
@@ -162,5 +164,12 @@ const nMa01ConComp = computed(() => {
 onMounted(() => {
 
 })
+
+onUnmounted(() => {
+    if (window.$$removeEventListener) {
+        window.$$removeEventListener("filter", filterListener)
+    }
+})
+
 
 </script>
